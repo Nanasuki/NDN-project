@@ -1,6 +1,8 @@
 # 内容中心网络NDN项目验收测试
 这是一个内容中心网络的前端展示界面~
 
+本人不善前端，又加之导师不在意，因此水一下。。
+
 # ndn-project (ndn-project)
 
 This is an Electron project about NDN.
