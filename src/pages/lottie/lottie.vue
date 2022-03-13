@@ -10,7 +10,7 @@
         @isLottieFinish="handleLottieFinish"
       />
       <div class="row justify-center" style="margin-left: 10px;margin-right: 10px">
-        <q-badge color="secondary" class="justify-start">
+        <!-- <q-badge color="secondary" class="justify-start">
           Speed: {{ defaultOptions.animationSpeed }}
         </q-badge>
         <q-slider
@@ -31,7 +31,7 @@
           <q-btn color="accent" icon="stop" @click="stop">
             <q-tooltip>停止</q-tooltip>
           </q-btn>
-        </q-btn-group>
+        </q-btn-group>-->
       </div>
       <v-md-editor :value="content" mode="preview"/>
     </div>

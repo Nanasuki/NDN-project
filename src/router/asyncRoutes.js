@@ -6,16 +6,28 @@ import layout from '../components/Layout/Layout'
 const asyncRoutesChildren = [
   {
     path: '/',
+    name: 'lottie',
+    meta: {
+      roles: ['admin', 'editor'],
+      title: '主页',
+      itemLabel: 'MY SHARE',
+      icon: 'home',
+      keepAlive: true
+    },
+    component: () => import('pages/lottie/lottie')
+  },
+  {
+    path: '/lottie',
     name: 'home',
     meta: {
       roles: ['admin', 'editor', 'test'],
-      title: '主页',
-      icon: 'home',
+      title: '可视化面板',
+      icon: 'menu',
       keepAlive: true
     },
     component: () => import('pages/home/home')
   },
-  {
+  /* {
     path: '/start',
     name: 'start',
     meta: {
@@ -229,13 +241,13 @@ const asyncRoutesChildren = [
       keepAlive: true
     },
     component: () => import('pages/axios/axios.vue')
-  },
+  },  */
   {
     path: '/menu-1',
     name: 'menu-1',
     meta: {
       roles: ['admin', 'test'],
-      title: '三级菜单',
+      title: '三级功能菜单',
       icon: 'filter_3'
     },
     component: layout,
@@ -245,7 +257,7 @@ const asyncRoutesChildren = [
         name: 'menu-2',
         meta: {
           roles: ['admin', 'test'],
-          title: '菜单 1-1',
+          title: '功能菜单 1-1',
           icon: 'filter_2',
           keepAlive: true
         },
@@ -256,7 +268,7 @@ const asyncRoutesChildren = [
             name: 'menu3',
             meta: {
               roles: ['admin', 'test'],
-              title: '菜单 1-2',
+              title: '功能菜单 1-2',
               icon: 'filter_1',
               keepAlive: true
             },
@@ -271,21 +283,9 @@ const asyncRoutesChildren = [
     name: 'external-link',
     meta: {
       roles: ['admin', 'editor'],
-      title: '外部链接/更多组件',
+      title: '外部链接页面',
       icon: 'send'
     }
-  },
-  {
-    path: '/lottie',
-    name: 'lottie',
-    meta: {
-      roles: ['admin', 'editor'],
-      title: 'lottie 动效',
-      itemLabel: 'MY SHARE',
-      icon: 'videocam',
-      keepAlive: true
-    },
-    component: () => import('pages/lottie/lottie')
   },
   {
     path: '/table-detail',
@@ -300,7 +300,7 @@ const asyncRoutesChildren = [
   },
   {
     path: '/cimo',
-    name: 'cimo',
+    name: 'NDN project',
     meta: {
       roles: ['admin', 'editor'],
       title: '关于作者',

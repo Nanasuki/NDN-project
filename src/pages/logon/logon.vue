@@ -10,7 +10,7 @@
       <div class="col flex justify-center items-center">
         <q-card square style="min-width: 290px;height: 100%; width: 60%;" class="no-shadow">
           <q-card-section align="center">
-            <h3 class="text-uppercase">cimo</h3>
+            <h3 class="text-uppercase">NDN-project</h3>
             <!-- 用户名 -->
             <q-input class="logon-input"
                clearable
@@ -77,7 +77,7 @@
 
         <q-card square style="min-width: 290px;height: 100%; width: 60%;" class="no-shadow">
           <q-card-section align="center">
-            <h3 class="text-uppercase">cimo</h3>
+            <h3 class="text-uppercase">NDN-project</h3>
             <!-- 用户名 -->
             <q-input class="logon-input q-electron-drag--exception"
                      clearable
@@ -121,11 +121,11 @@
               @click="logon"
             >登 录 系 统
             </q-btn>
-            <div class="row justify-between" style="margin-bottom: 20px;">
+            <!--<div class="row justify-between" style="margin-bottom: 20px;">
               <q-btn flat label="忘记密码"/>
               <q-btn outline label="我要注册"/>
             </div>
-            <p class="text-grey" align="left">账号2 ：test &nbsp;&nbsp;&nbsp;&nbsp;密码均为空</p>
+            <p class="text-grey" align="left">账号2 ：test &nbsp;&nbsp;&nbsp;&nbsp;密码均为空</p>-->
           </q-card-section>
         </q-card>
       </div>
@@ -165,7 +165,7 @@ export default {
           this.$router.push('/').then(e => {
             this.$q.notify({
               icon: 'insert_emoticon',
-              message: 'hi，cimo 欢迎回来',
+              message: 'hi，欢迎回到系统',
               color: 'green',
               position: 'top',
               timeout: 1500

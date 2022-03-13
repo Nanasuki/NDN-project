@@ -22,9 +22,8 @@ Vue.prototype.$Max_KeepAlive = 10
 
 // 侧边栏底部文字
 Vue.prototype.$buttonList = [
-  { text: 'Quasar', URL: 'http://www.quasarchs.com/' },
-  { text: 'Github', URL: 'https://github.com/972784674t/vue-quasar-manage' },
-  { text: 'Gitee', URL: 'https://gitee.com/incimo/vue-quasar-manage' },
-  { text: 'GreaterWMS', URL: 'https://github.com/Singosgu/GreaterWMS' },
-  { text: '关于作者', URL: '/cimo' }
+  { text: '北京航空航天大学', URL: 'http://www.buaa.edu.cn' },
+  { text: '网络空间安全学院', URL: 'http://cst.buaa.edu.cn/' },
+  { text: '开发者', URL: 'http://nanasuki.github.io/' },
+  { text: '关于实验室', URL: '/cimo' }
 ]

@@ -12,9 +12,9 @@
       <q-tooltip v-if="!this.$q.fullscreen.isActive">全屏</q-tooltip>
       <q-tooltip v-if="this.$q.fullscreen.isActive">退出全屏</q-tooltip>
     </q-btn>
-    <q-btn round dense flat icon="video_call" v-if="$q.screen.gt.sm">
+    <!--<q-btn round dense flat icon="video_call" v-if="$q.screen.gt.sm">
       <q-tooltip>创建</q-tooltip>
-    </q-btn>
+    </q-btn>-->
     <q-btn round dense flat icon="apps" v-if="$q.screen.gt.sm">
       <q-tooltip>应用</q-tooltip>
     </q-btn>
@@ -23,7 +23,7 @@
     </q-btn>
     <q-btn round dense flat icon="notifications">
       <q-badge color="red" text-color="" floating>
-        2
+        1
       </q-badge>
       <q-tooltip>通知</q-tooltip>
     </q-btn>
@@ -33,10 +33,10 @@
 
           <div class="column items-center">
             <q-avatar size="72px">
-              <img :src="this.$PUBLIC_PATH + 'data/avatar.jpg'">
+              <img :src="this.$PUBLIC_PATH + 'data/beihang.jpg'">
             </q-avatar>
 
-            <div class="text-subtitle1 q-mt-md q-mb-xs">Hi！ CIMO</div>
+            <div class="text-subtitle1 q-mt-md q-mb-xs">权限：NDN管理员</div>
 
             <q-btn
               color="primary"
@@ -49,7 +49,7 @@
         </div>
       </q-menu>
       <q-avatar size="26px">
-        <img :src="this.$PUBLIC_PATH + 'data/avatar.jpg'">
+        <img :src="this.$PUBLIC_PATH + 'data/beihang.jpg'">
       </q-avatar>
       <q-tooltip>账号</q-tooltip>
     </q-btn>
