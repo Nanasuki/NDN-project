@@ -53,17 +53,18 @@
 </template>
 <script>
 const exec = require('child_process').exec
+
 // 任何你期望执行的cmd命令，ls都可以
-const cmdStr = './build-ndnnode.sh'
+const cmdStr = './app.sh'
 // 执行cmd命令的目录，如果使用cd xx && 上面的命令，这种将会无法正常退出子进程
-const cmdPath = 'D:\\'
+const cmdPath = '~/ndn-app/'
 
 export default {
   methods: {
     runExec () {
       console.log('执行命令行')
       // 执行命令行，如果命令不需要路径，或就是项目根目录，则不需要cwd参数：
-      exec(cmdStr, { cwd: cmdPath, encoding: 'gbk' },
+      exec(cmdStr, { cwd: cmdPath },
         function (error, stdout, stderr) {
           if (error) {
             console.error('error: ' + error)
