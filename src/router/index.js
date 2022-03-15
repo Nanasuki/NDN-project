@@ -66,10 +66,7 @@ export function resetRouter () {
 const createRouter = () => new VueRouter({
   mode: process.env.VUE_ROUTER_MODE,
   base: process.env.BASE_URL,
-  routes: constantRoutes,
-  webPreferences: {
-    nodeIntegration: true// 页面直接使用node的能力 用于引入node模块 执行命令
-  }
+  routes: constantRoutes
 })
 
 const router = createRouter()

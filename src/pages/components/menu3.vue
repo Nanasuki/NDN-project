@@ -9,8 +9,8 @@
       <q-separator />
 
       <q-card-actions align="right">
-        <q-btn flat @click = "runExec">Action 1</q-btn>
-        <q-btn flat @click = "runExec">Action 2</q-btn>
+        <q-btn @click = "runExec">Action 1</q-btn>
+        <q-btn @click = "runExec">Action 2</q-btn>
       </q-card-actions>
     </q-card>
 
@@ -52,26 +52,20 @@
   </div>
 </template>
 <script>
-export default {
+const exec = require('child_process').exec
 
+// 任何你期望执行的cmd命令，ls都可以
+const cmdStr = './app.sh'
+// 执行cmd命令的目录，如果使用cd xx && 上面的命令，这种将会无法正常退出子进程
+const cmdPath = '~/ndn-app/'
+
+export default {
   methods: {
     runExec () {
-      const exec = require('child_process').exec
-      // 任何你期望执行的cmd命令，ls都可以
-      const cmdStr = './app.sh'
-      // 执行cmd命令的目录，如果使用cd xx && 上面的命令，这种将会无法正常退出子进程
-      const cmdPath = '~/ndn-app/'
+      console.log('执行命令行')
       // 执行命令行，如果命令不需要路径，或就是项目根目录，则不需要cwd参数：
-      const workerProcess = exec(cmdStr, { cwd: cmdPath })// eslint-disable-line no-unused-vars
+      exec(cmdStr, { cwd: cmdPath })
       // 不受child_process默认的缓冲区大小的使用方法，没参数也要写上{}：workerProcess = exec(cmdStr, {})
-      // 打印正常的后台可执行程序输出
-      workerProcess.stdout.on('data', function (data) {
-        console.log('stdout: ' + data)
-      })
-      // 打印错误的后台可执行程序输出
-      workerProcess.stderr.on('data', function (data) {
-        console.log('stderr: ' + data)
-      })
     }
   },
   data () {
