@@ -1,54 +1,98 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-card class="my-card">
-      <q-card-section class="bg-primary text-white">
-        <div class="text-h6">Our Changing Planet</div>
-        <div class="text-subtitle2">by John Doe</div>
-      </q-card-section>
+    <q-page-sticky position="bottom-right" :offset="[38, 38]">
+      <q-btn icon="add" direction="up" color="accent" size="25px" @click = "runExec">启动NDN-app</q-btn>
+    </q-page-sticky>
+    <div class="q-pa-md">
 
-      <q-separator />
+    <q-stepper
+      v-model="step"
+      ref="stepper"
+      color="primary"
+      animated
+    >
+      <q-step
+        :name="1"
+        title="第一步：部署NFD"
+        icon="settings"
+        :done="step > 1"
+        style="min-height: 200px;"
+      >
+        NFD 从源码安装完后，需要创建一个配置文件，如果是使用$./waf configure默认安装，在/usr/local/etc/ndn/目录下有一个配置模板nfd.conf.sample，使用如下命令创建配置文件：
+        <br>
+        <br>
+        $sudo cp /usr/local/etc/ndn/nfd.conf.sample /usr/local/etc/ndn/nfd.conf
+        <br>
+        <br>
+        准备两台机器，按照如下示例配置完成后，进行连接：
+        <img :src="this.$PUBLIC_PATH + 'data/ndnimage.jpg'">
+      </q-step>
 
-      <q-card-actions align="right">
-        <q-btn @click = "runExec">Action 1</q-btn>
-        <q-btn @click = "runExec">Action 2</q-btn>
-      </q-card-actions>
-    </q-card>
+      <q-step
+        :name="2"
+        title="启动NFD"
+        caption="Optional"
+        icon="create_new_folder"
+        :done="step > 2"
+        style="min-height: 200px;"
+      >
+        接下来，在两台机器都启动nfd，使用如下命令：
+        <br>
+        <br>
+        $nfd-start
+        <br>
+        <br>
+        启动完毕后，使用nfd-status查看nfd的状态，为了完成NFD实践，需要安装ndn-tools，安装完毕后，在这两台机器上分别配置一个face，可以使用$nfd-status命令查看nfd的状态，其中就会用新生成的face信息。
+      </q-step>
 
-    <q-card class="my-card">
-      <q-card-section class="bg-purple text-white">
-        <div class="text-h6">Our Changing Planet</div>
-        <div class="text-subtitle2">by wz</div>
-      </q-card-section>
+      <q-step
+        :name="3"
+        title="NDN测试"
+        icon="assignment"
+        style="min-height: 200px;"
+      >
+        最后我们使用ndn-tools的 ndnpingserver和ndnping两个命令来进行此次实践。最后我们使用ndn-tools的 ndnpingserver和ndnping两个命令来进行此次实践。最后我们使用ndn-tools的 ndnpingserver和ndnping两个命令来进行此次实践。
+        <br>
+        <br>
+        最后我们使用ndn-tools的 ndnpingserver和ndnping两个命令来进行此次实践。最后我们使用ndn-tools的 ndnpingserver和ndnping两个命令来进行此次实践。最后我们使用ndn-tools的 ndnpingserver和ndnping两个命令来进行此次实践。
+      </q-step>
 
-      <q-card-actions align="around">
-        <q-btn flat @click = "runExec">Action 1</q-btn>
-        <q-btn flat @click = "runExec">Action 2</q-btn>
-      </q-card-actions>
-    </q-card>
+      <q-step
+        :name="4"
+        title="启动NDN-app"
+        icon="add_comment"
+        style="min-height: 200px;"
+      >
+        点击右下方启动NDN-app按钮，在您的主机上启动NDN-app程序，该程序将包含6个可执行的功能，包括使您的主机成为NDN网络的服务节点或者客户节点，以及使用切片的形式分发文件和接收文件。
+        <br>
+        <br>
+        点击右下方启动NDN-app按钮，在您的主机上启动NDN-app程序，该程序将包含6个可执行的功能，包括使您的主机成为NDN网络的服务节点或者客户节点，以及使用切片的形式分发文件和接收文件。
+      </q-step>
 
-    <q-card class="my-card">
-      <q-card-section class="bg-teal text-white">
-        <div class="text-h6">Our Changing Planet</div>
-        <div class="text-subtitle2">by wz</div>
-      </q-card-section>
+      <template v-slot:navigation>
+        <q-stepper-navigation>
+          <q-btn @click="$refs.stepper.next()" color="primary" :label="step === 4 ? 'Finish' : 'Continue'" />
+          <q-btn v-if="step > 1" flat color="primary" @click="$refs.stepper.previous()" label="Back" class="q-ml-sm" />
+        </q-stepper-navigation>
+      </template>
 
-      <q-card-actions vertical align="right">
-        <q-btn flat>Action 1</q-btn>
-        <q-btn flat>Action 2</q-btn>
-      </q-card-actions>
-    </q-card>
+      <template v-slot:message>
+        <q-banner v-if="step === 1" class="bg-purple-8 text-white q-px-lg">
+          这一步将引导您在您的机器上完成部署NFD...
+        </q-banner>
+        <q-banner v-else-if="step === 2" class="bg-orange-8 text-white q-px-lg">
+          这一步将引导您在您的机器上完成启动NFD...
+        </q-banner>
+        <q-banner v-else-if="step === 3" class="bg-green-8 text-white q-px-lg">
+          这一步将引导您在您的机器上完成NDN测试...
+        </q-banner>
+        <q-banner v-else class="bg-blue-8 text-white q-px-lg">
+          这一步将引导您在您的机器上启动NDN-APP...
+        </q-banner>
+      </template>
+    </q-stepper>
 
-    <q-card class="my-card">
-      <q-card-section class="bg-grey-8 text-white">
-        <div class="text-h6">Our Changing Planet</div>
-        <div class="text-subtitle2">by wz</div>
-      </q-card-section>
-
-      <q-card-actions vertical align="center">
-        <q-btn flat>Action 1</q-btn>
-        <q-btn flat>Action 2</q-btn>
-      </q-card-actions>
-    </q-card>
+  </div>
   </div>
 </template>
 <script>
@@ -78,7 +122,7 @@ export default {
   },
   data () {
     return {
-      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      step: 1
     }
   }
 }

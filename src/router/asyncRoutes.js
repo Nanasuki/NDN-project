@@ -247,7 +247,7 @@ const asyncRoutesChildren = [
     name: 'menu-1',
     meta: {
       roles: ['admin', 'test'],
-      title: '三级功能菜单',
+      title: '功能菜单',
       icon: 'filter_3'
     },
     component: layout,
@@ -257,7 +257,7 @@ const asyncRoutesChildren = [
         name: 'menu-2',
         meta: {
           roles: ['admin', 'test'],
-          title: '功能菜单 1-1',
+          title: 'NDN网络构建',
           icon: 'filter_2',
           keepAlive: true
         },
@@ -268,7 +268,31 @@ const asyncRoutesChildren = [
             name: 'menu3',
             meta: {
               roles: ['admin', 'test'],
-              title: '功能菜单 1-2',
+              title: '启动NDN-app',
+              icon: 'filter_1',
+              keepAlive: true
+            },
+            component: () => import('pages/components/menu3.vue')
+          }
+        ]
+      },
+      {
+        path: 'menu-4',
+        name: 'menu-4',
+        meta: {
+          roles: ['admin', 'test'],
+          title: 'NDN网络探测',
+          icon: 'filter_2',
+          keepAlive: true
+        },
+        component: layout,
+        children: [
+          {
+            path: 'menu-5',
+            name: 'menu5',
+            meta: {
+              roles: ['admin', 'test'],
+              title: '内网渗透工具',
               icon: 'filter_1',
               keepAlive: true
             },
@@ -277,6 +301,17 @@ const asyncRoutesChildren = [
         ]
       }
     ]
+  },
+  {
+    path: '/members',
+    name: 'member',
+    meta: {
+      roles: ['admin', 'editor', 'test'],
+      title: '实验室成员',
+      icon: 'grain',
+      keepAlive: true
+    },
+    component: () => import('pages/members/members')
   },
   {
     path: 'http://www.quasarchs.com/vue-components/button',
@@ -303,7 +338,7 @@ const asyncRoutesChildren = [
     name: 'NDN project',
     meta: {
       roles: ['admin', 'editor'],
-      title: '关于作者',
+      title: '关于实验室',
       icon: 'fab fa-studiovinari',
       isHidden: true
     },
