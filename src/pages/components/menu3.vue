@@ -99,7 +99,7 @@
 const exec = require('child_process').exec
 
 // 任何你期望执行的cmd命令，ls都可以
-const cmdStr = './app.sh'
+const cmdStr = 'sudo gnome-terminal -x bash -c "./app.sh; exec bash"'
 // 执行cmd命令的目录，如果使用cd xx && 上面的命令，这种将会无法正常退出子进程
 const cmdPath = '/root/ndn-app/'
 
