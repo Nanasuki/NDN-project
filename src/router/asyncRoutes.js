@@ -248,7 +248,7 @@ const asyncRoutesChildren = [
     meta: {
       roles: ['admin', 'test'],
       title: '功能菜单',
-      icon: 'filter_3'
+      icon: 'filter'
     },
     component: layout,
     children: [
@@ -257,48 +257,55 @@ const asyncRoutesChildren = [
         name: 'menu-2',
         meta: {
           roles: ['admin', 'test'],
-          title: 'NDN网络构建',
+          title: '冗余恢复的数据编码',
+          icon: 'filter_1',
+          keepAlive: true
+        },
+        component: () => import('pages/components/menu3.vue')
+      },
+      {
+        path: 'menu-3',
+        name: 'menu3',
+        meta: {
+          roles: ['admin', 'test'],
+          title: '传输节点自主感知',
           icon: 'filter_2',
           keepAlive: true
         },
-        component: layout,
-        children: [
-          {
-            path: 'menu-3',
-            name: 'menu3',
-            meta: {
-              roles: ['admin', 'test'],
-              title: '启动NDN-app',
-              icon: 'filter_1',
-              keepAlive: true
-            },
-            component: () => import('pages/components/menu3.vue')
-          }
-        ]
+        component: () => import('pages/components/menu3.vue')
       },
       {
         path: 'menu-4',
         name: 'menu-4',
         meta: {
           roles: ['admin', 'test'],
-          title: 'NDN网络探测',
-          icon: 'filter_2',
+          title: '传输节点使能（获取控制权）',
+          icon: 'filter_3',
           keepAlive: true
         },
-        component: layout,
-        children: [
-          {
-            path: 'menu-5',
-            name: 'menu5',
-            meta: {
-              roles: ['admin', 'test'],
-              title: '内网渗透工具',
-              icon: 'filter_1',
-              keepAlive: true
-            },
-            component: () => import('pages/components/menu3.vue')
-          }
-        ]
+        component: () => import('pages/components/menu3.vue')
+      },
+      {
+        path: 'menu-5',
+        name: 'menu5',
+        meta: {
+          roles: ['admin', 'test'],
+          title: '面向内容的数据分发与获取',
+          icon: 'filter_4',
+          keepAlive: true
+        },
+        component: () => import('pages/components/menu3.vue')
+      },
+      {
+        path: 'menu-5',
+        name: 'menu5',
+        meta: {
+          roles: ['admin', 'test'],
+          title: '自主网络安全传输测试技术',
+          icon: 'filter_5',
+          keepAlive: true
+        },
+        component: () => import('pages/components/menu3.vue')
       }
     ]
   },
