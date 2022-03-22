@@ -1,0 +1,29 @@
+{
+    "data" : [
+        {
+            "name" : "node1/172.25.158.25",
+            "available": 159,
+            "Transportable": 6.0
+        },
+        {
+            "name" : "node2/172.25.158.24",
+            "available": 159,
+            "Transportable": 6.0
+        },
+        {
+            "name" : "node3/172.31.157.49",
+            "available": 159,
+            "Transportable": 6.0
+        },
+        {
+            "name" : "node4/172.25.158.26",
+            "available": 159,
+            "Transportable": 6.0
+        },
+        {
+            "name" : "node77/172.25.158.27",
+            "available": 159,
+            "Transportable": 6.0
+        }
+    ]
+}

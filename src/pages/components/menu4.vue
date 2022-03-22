@@ -3,99 +3,70 @@
   <base-content>
     <div class="container q-pa-lg q-col-gutter-md">
       <div class="row q-col-gutter-md">
-        <form class="q-pa-md" @submit.prevent="simulateSubmit">
-         <div class="q-gutter-md row items-start">
-            <q-input
-              v-model.number="first"
-              type="number">
-              <template v-slot:before>
-                感知节点IP地址
-                <q-icon name="login" />
-              </template>
-            </q-input>
-            <q-input
-              v-model.number="second"
-              type="number">
-              <template v-slot:before>
-                /
-              </template>
-            </q-input>
-            <q-input
-              v-model.number="third"
-              type="number">
-              <template v-slot:before>
-                /
-              </template>
-            </q-input>
-            <q-input
-              v-model.number="fourth"
-              type="number">
-              <template v-slot:before>
-                /
-              </template>
-            </q-input>
-            <div class="row justify-end">
+      <div class="col-xs-12 col-md-6">
+          <q-card class="my-card cimo-shadow">
+            <q-img
+              :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
+            />
+            <q-card-section>
+              <div class="text-overline text-orange-9">传输节点使能（获取控制权）</div>
+            </q-card-section>
+            <q-card-actions>
               <q-btn
-                type="submit"
-                :loading="submitting"
-                label="感  知"
-                class="q-mt-md"
-                color="teal"
-              >
-                <template v-slot:loading>
-                  <q-spinner-facebook />
-                </template>
-              </q-btn>
-            </div>
-          </div>
-        </form>
-      </div>
-      <q-card v-if="flag" flat bordered class="q-mt-md bg-grey-2">
-          <div class="row q-col-gutter-md">
-            <div class="col-xs-12 col-md-6">
-              <q-card class="my-card cimo-shadow">
-                <q-img
-                  :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
-                />
-              </q-card>
-            </div>
-            <div class="col-xs-12 col-md-6">
-              <q-card class="my-card cimo-shadow">
-                <q-img
-                  :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
-                />
-              </q-card>
-            </div>
-          </div>
-        </q-card>
-        <div class="row q-col-gutter-md">
-          <div class="col-xs-12 col-md-6">
-            <q-card class="my-card cimo-shadow">
-              <q-img
-                :src="this.$PUBLIC_PATH + 'data/自主感知.png'"
+                color="grey"
+                label="扩散模型简介"
+                round
+                flat
+                dense
+                :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+                @click="expanded = !expanded"
               />
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <q-img
-                :src="this.$PUBLIC_PATH + 'data/主机探测.png'"
-              />
-            </q-card>
-          </div>
-          <div class="col-xs-12 col-md-6">
-            <q-card class="my-card cimo-shadow">
-              <lottie-web-cimo
-                ref="lottie_web"
-                :path="defaultOptions.path"
-                :loop="defaultOptions.loop"
-                :animation-speed="defaultOptions.animationSpeed"
-                @isLottieFinish="handleLottieFinish"
-              />
-            </q-card>
-          </div>
+            </q-card-actions>
+
+            <q-slide-transition>
+              <div v-show="expanded">
+                <q-separator/>
+                <q-card-section class="text-subitle2">
+                  {{ lorem }}
+                </q-card-section>
+              </div>
+            </q-slide-transition>
+          </q-card>
         </div>
+        <div class="col-xs-12 col-md-6">
+          <q-table
+            class="cimo-shadow"
+            :grid="$q.screen.xs"
+            title="传输节点使能"
+            :data="data"
+            :columns="columns"
+            :filter="filter"
+            row-key="name"
+            style="height: 750px"
+          >
+            <template v-slot:top-right>
+              <q-input dense debounce="300" v-model="filter" placeholder="搜索节点">
+                <template v-slot:append>
+                  <q-icon name="search"/>
+                </template>
+              </q-input>
+            </template>
+            <template v-slot:body="props">
+              <q-tr :props="props">
+                <q-td key="name" :props="props">{{ props.row.name }}</q-td>
+                <q-td key="available" :props="props">{{ props.row.available }}</q-td>
+                <q-td key="Transportable" :props="props">{{ props.row.Transportable }}</q-td>
+                <q-td key="operating" :props="props">
+                <q-btn-group push>
+                  <q-btn class="btn-table text-white" push label="植入木马" icon="verified_user" @click="handleTableClick(props.row)"/>
+                  <q-btn class="btn-table text-white" push label="字典攻击" icon="tune"/>
+                </q-btn-group>
+                </q-td>
+              </q-tr>
+            </template>
+          </q-table>
+        </div>
+      </div>
     </div>
   </base-content>
 
@@ -109,7 +80,6 @@ import chartPie from '../../assets/js/echarts-1'
 import charts2Option from '../../assets/js/echarts-2'
 import { income, expense, total } from '../../assets/js/echarts-3'
 import chartZ from '../../assets/js/echarts-4'
-import LottieWebCimo from '../../components/LottieWebCimo/LottieWebCimo'
 
 function wrapCsvValue (val, formatFn) {
   let formatted = formatFn !== undefined
@@ -134,18 +104,11 @@ function wrapCsvValue (val, formatFn) {
 export default {
   name: 'home',
   components: {
-    BaseContent,
-    LottieWebCimo
+    BaseContent
   },
   data () {
     return {
-      flag: false,
-      submitting: false,
-      first: 0,
-      second: 0,
-      third: 0,
-      fourth: 0,
-      expanded: false,
+      expanded: true,
       chartPie,
       chartZ,
       charts2Option,
@@ -153,65 +116,59 @@ export default {
       expense,
       total,
       thumbStyle,
-      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      lorem: '扩散主要包括获权、传递和激活三种活动，邻近节点的使能主要通过扩散活动完成。首先，从网络中已受控制的主机出发，结合其可达活跃主机的攻击难易程度和可用性信息，确定下一步节点攻击顺序；从中选择易于攻击且可用性强的节点进行首次攻破，采取钓鱼攻击欺骗执行，远程登录控制和缓冲区溢出攻击等方式，获取目标主机的普通权限，实现获权活动。其次接着，收集采集获权主机的CPU、内存以及存储空间等信息，进行节点NDN可用性评估，将不满足条件的纳入已控制节点继续迭代执行获权活动；满足条件的节点则远程控制下载或者传入安装文件，完成传递活动。再次然后，在目标主机中安装配置NDN网络环境，接入到当前NDN网络中，实现当前节点的传播，并将该节点加入到控制节点中；若仍存在未控制节点，则继续迭代执行扩散活动，直至网络中所有满足条件节点全部受控。因此，本节的重点是如何获得更多主机的控制权限，并安装配置和激活节点的NDN网络。',
       filter: '',
       columns: [
         {
           name: 'name',
           required: true,
-          label: 'Dessert (100g serving)',
+          label: '主机节点感知',
           align: 'left',
           field: row => row.name,
           format: val => `${val}`,
           sortable: true
         },
         {
-          name: 'calories',
+          name: 'available',
           align: 'center',
-          label: 'Calories',
-          field: 'calories',
+          label: '节点可用性',
+          field: 'available',
           sortable: true
         },
         {
-          name: 'fat',
-          label: 'Fat (g)',
-          field: 'fat',
+          name: 'Transportable',
+          align: 'center',
+          label: '节点传输能力',
+          field: 'Transportable',
           sortable: true
-        },
-        {
-          name: 'carbs',
-          label: 'Carbs (g)',
-          field: 'carbs'
         },
         {
           name: 'operating',
-          label: 'operating',
+          label: '使能操作',
           align: 'center',
           field: 'operating',
           sortable: true
         }
       ],
-      data: [],
-      defaultOptions: {
-        path: 'data/find_lottie.json',
-        loop: true,
-        animationSpeed: 1
-      }
+      data: []
     }
   },
   methods: {
-    simulateSubmit () {
-      this.submitting = true
-      // Simulating a delay here.
-      // When we are done, we reset "submitting"
-      // Boolean to false to restore the
-      // initial state.
-      setTimeout(() => {
-        // delay simulated, we are done,
-        // now restoring submit to its initial state
-        this.flag = true
-        this.submitting = false
-      }, 3000)
+    getMsg () {
+      this.isLoadingVisible = !this.isLoadingVisible
+      const query = {
+        url: this.$PUBLIC_PATH + 'data/menu4.json',
+        method: 'get'
+      }
+      this.$fetchData(query).then(res => {
+        this.isLoadingVisible = !this.isLoadingVisible
+        console.log(res)
+        for (var i in res.data.data) {
+          this.data.push(res.data.data[i])
+        }
+      }).catch(error => {
+        console.log(error)
+      })
     },
     handleTableClick (e) {
       this.$router.push({
@@ -246,6 +203,9 @@ export default {
         })
       }
     }
+  },
+  created () {
+    this.getMsg()
   }
 }
 </script>

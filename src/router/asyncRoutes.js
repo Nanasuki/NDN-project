@@ -261,7 +261,7 @@ const asyncRoutesChildren = [
           icon: 'filter_1',
           keepAlive: true
         },
-        component: () => import('pages/components/menu3.vue')
+        component: () => import('pages/components/menu2.vue')
       },
       {
         path: 'menu-3',
@@ -283,7 +283,7 @@ const asyncRoutesChildren = [
           icon: 'filter_3',
           keepAlive: true
         },
-        component: () => import('pages/components/menu3.vue')
+        component: () => import('pages/components/menu4.vue')
       },
       {
         path: 'menu-5',
@@ -294,18 +294,18 @@ const asyncRoutesChildren = [
           icon: 'filter_4',
           keepAlive: true
         },
-        component: () => import('pages/components/menu3.vue')
+        component: () => import('pages/components/menu5.vue')
       },
       {
-        path: 'menu-5',
-        name: 'menu5',
+        path: 'menu-6',
+        name: 'menu6',
         meta: {
           roles: ['admin', 'test'],
           title: '自主网络安全传输测试技术',
           icon: 'filter_5',
           keepAlive: true
         },
-        component: () => import('pages/components/menu3.vue')
+        component: () => import('pages/components/menu5.vue')
       }
     ]
   },
