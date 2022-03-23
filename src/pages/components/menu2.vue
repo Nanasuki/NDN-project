@@ -2,7 +2,7 @@
 
   <base-content>
     <div class="container q-pa-lg q-col-gutter-md">
-    <div class="text-h4" align="center">请求文件冗余编码</div>
+    <div class="text-h4" align="center">请求文件冗余分片</div>
       <div class="row q-col-gutter-md">
         <div class="col-xs-12 col-md-12">
             <q-form @submit="onSubmit" class="q-gutter-md">
@@ -58,14 +58,16 @@
             </q-card>
         </div>
         <div class="col-xs-12 col-md-6">
-          <q-card class="my-card cimo-shadow">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <q-img
               :src="this.$PUBLIC_PATH + 'data/冗余编码.png'"
             />
-          </q-card>
         </div>
         <div class="col-xs-12 col-md-6">
-        <q-card class="my-card cimo-shadow">
           <lottie-web-cimo
             ref="lottie_web"
             :path="defaultOptions.path"
@@ -73,7 +75,6 @@
             :animation-speed="defaultOptions.animationSpeed"
             @isLottieFinish="handleLottieFinish"
           />
-          </q-card>
         </div>
       </div>
     </div>

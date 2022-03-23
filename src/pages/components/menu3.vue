@@ -2,7 +2,7 @@
 
   <base-content>
     <div class="container q-pa-lg q-col-gutter-md">
-      <div class="row q-col-gutter-md">
+      <div class="row q-col-gutter-md" style="display:block;margin:0 auto">
         <form class="q-pa-md" @submit.prevent="simulateSubmit">
          <div class="q-gutter-md row items-start">
             <q-input
@@ -34,12 +34,15 @@
                 /
               </template>
             </q-input>
+            <div class="row justify-end"/>
+            <div class="row justify-end"/>
+            <div class="row justify-end"/>
             <div class="row justify-end">
               <q-btn
                 type="submit"
                 :loading="submitting"
+                class="q-px-lg q-py-xs"
                 label="感  知"
-                class="q-mt-md"
                 color="teal"
               >
                 <template v-slot:loading>
@@ -50,42 +53,189 @@
           </div>
         </form>
       </div>
-      <q-card v-if="flag" flat bordered class="q-mt-md bg-grey-2">
+      <q-dialog v-model="seamless" seamless position="bottom">
+      <q-card style="width: 350px">
+        <q-linear-progress :value="1" color="pink" />
+
+        <q-card-section class="row items-center no-wrap">
+          <div>
+            <div class="text-weight-bold">该节点可以部署NDN网络</div>
+            <div class="text-grey">节点可利用能力：123</div>
+            <div class="text-grey">节点传输能力：4</div>
+          </div>
+          <q-space />
+          <q-btn flat round icon="close" v-close-popup />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+      <q-card v-if="flag" flat bordered class="q-mt-md bg-white-2">
           <div class="row q-col-gutter-md">
             <div class="col-xs-12 col-md-6">
-              <q-card class="my-card cimo-shadow">
-                <q-img
-                  :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
-                />
-              </q-card>
+                <q-banner dense class="bg-primary text-white">
+                  <div class="text-h4" align="center">主机感知：{{first}}.{{second}}.{{third}}.{{fourth}}</div>
+                </q-banner>
+                <q-list bordered class="rounded-borders">
+                  <q-expansion-item
+                    icon="bluetooth"
+                    label="开放端口"
+                    expand-separator
+                    header-class="bg-primary text-white"
+                    expand-icon-class="text-white"
+                  >
+                    <q-card class="bg-primary-2">
+                      <q-card-section>
+                        主机开放的端口：Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                        commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                        eveniet doloribus ullam aliquid.
+                      </q-card-section>
+                    </q-card>
+                  </q-expansion-item>
+                  <q-expansion-item
+                    icon="bluetooth"
+                    label="开放服务类型"
+                    expand-separator
+                    header-class="bg-primary text-white"
+                    expand-icon-class="text-white"
+                  >
+                    <q-card class="bg-primary-2">
+                      <q-card-section>
+                        主机开放的服务：Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                        commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                        eveniet doloribus ullam aliquid.
+                      </q-card-section>
+                    </q-card>
+                  </q-expansion-item>
+                  <q-expansion-item
+                    icon="bluetooth"
+                    label="操作系统"
+                    expand-separator
+                    header-class="bg-primary text-white"
+                    expand-icon-class="text-white"
+                  >
+                    <q-card class="bg-primary-2">
+                      <q-card-section>
+                        主机操作系统：Ubuntu 18.04
+                      </q-card-section>
+                    </q-card>
+                  </q-expansion-item>
+                  <q-expansion-item
+                    icon="bluetooth"
+                    label="存在漏洞探测"
+                    expand-separator
+                    header-class="bg-primary text-white"
+                    expand-icon-class="text-white"
+                  >
+                    <q-card class="bg-primary-2">
+                      <q-card-section>
+                        主机存在的漏洞：xxx、xxx、xxx、xxx
+                      </q-card-section>
+                    </q-card>
+                  </q-expansion-item>
+                </q-list>
             </div>
             <div class="col-xs-12 col-md-6">
-              <q-card class="my-card cimo-shadow">
                 <q-img
-                  :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
+                  :src="this.$PUBLIC_PATH + 'data/主机探测.png'"
                 />
-              </q-card>
+                <br/>
+                <br/>
+                <br/>
+                <q-img
+                  :src="this.$PUBLIC_PATH + 'data/主机探测2.png'"
+                />
+            </div>
+            <div class="col-xs-12 col-md-12">
+              <q-separator inset />
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <q-banner dense class="bg-teal text-white">
+                  <div class="text-h4" align="center">网络感知</div>
+                </q-banner>
+                <q-list bordered class="rounded-borders">
+                  <q-expansion-item
+                    icon="bluetooth"
+                    label="网络时延"
+                    expand-separator
+                    header-class="bg-teal text-white"
+                    expand-icon-class="text-white"
+                  >
+                    <q-card class="bg-teal-2">
+                      <q-card-section>
+                        主机开放的端口：Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                        commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                        eveniet doloribus ullam aliquid.
+                      </q-card-section>
+                    </q-card>
+                  </q-expansion-item>
+                  <q-expansion-item
+                    icon="bluetooth"
+                    label="网络丢包率"
+                    expand-separator
+                    header-class="bg-teal text-white"
+                    expand-icon-class="text-white"
+                  >
+                    <q-card class="bg-teal-2">
+                      <q-card-section>
+                        主机开放的服务：Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                        commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                        eveniet doloribus ullam aliquid.
+                      </q-card-section>
+                    </q-card>
+                  </q-expansion-item>
+                  <q-expansion-item
+                    icon="bluetooth"
+                    label="网络抖动"
+                    expand-separator
+                    header-class="bg-teal text-white"
+                    expand-icon-class="text-white"
+                  >
+                    <q-card class="bg-teal-2">
+                      <q-card-section>
+                        主机开放的服务：Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                        commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                        eveniet doloribus ullam aliquid.
+                      </q-card-section>
+                    </q-card>
+                  </q-expansion-item>
+                  <q-expansion-item
+                    icon="bluetooth"
+                    label="数据包传输速度"
+                    expand-separator
+                    header-class="bg-teal text-white"
+                    expand-icon-class="text-white"
+                  >
+                    <q-card class="bg-teal-2">
+                      <q-card-section>
+                        主机开放的服务：Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                        commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                        eveniet doloribus ullam aliquid.
+                      </q-card-section>
+                    </q-card>
+                  </q-expansion-item>
+                </q-list>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <q-img
+                  :src="this.$PUBLIC_PATH + 'data/网络探测.png'"
+                />
             </div>
           </div>
         </q-card>
         <div class="row q-col-gutter-md">
           <div class="col-xs-12 col-md-6">
-            <q-card class="my-card cimo-shadow">
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
               <q-img
                 :src="this.$PUBLIC_PATH + 'data/自主感知.png'"
               />
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <q-img
-                :src="this.$PUBLIC_PATH + 'data/主机探测.png'"
-              />
-            </q-card>
           </div>
           <div class="col-xs-12 col-md-6">
-            <q-card class="my-card cimo-shadow">
               <lottie-web-cimo
                 ref="lottie_web"
                 :path="defaultOptions.path"
@@ -93,7 +243,6 @@
                 :animation-speed="defaultOptions.animationSpeed"
                 @isLottieFinish="handleLottieFinish"
               />
-            </q-card>
           </div>
         </div>
     </div>
@@ -139,12 +288,13 @@ export default {
   },
   data () {
     return {
+      seamless: false,
       flag: false,
       submitting: false,
-      first: 0,
+      first: 127,
       second: 0,
       third: 0,
-      fourth: 0,
+      fourth: 1,
       expanded: false,
       chartPie,
       chartZ,
@@ -210,6 +360,7 @@ export default {
         // delay simulated, we are done,
         // now restoring submit to its initial state
         this.flag = true
+        this.seamless = true
         this.submitting = false
       }, 3000)
     },

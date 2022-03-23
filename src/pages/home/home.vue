@@ -1,6 +1,7 @@
 <template>
 
   <base-content>
+    <iframe height="800px" width="100%" id="mainIframe" name="mainIframe" src="dist/index.html"></iframe>
     <div class="container q-pa-lg q-col-gutter-md">
       <div class="row justify-between q-col-gutter-md">
         <div class="col-xs-12 col-md-3 q-gutter-md">
