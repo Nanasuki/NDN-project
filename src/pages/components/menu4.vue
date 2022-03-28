@@ -12,7 +12,7 @@
             :columns="columns"
             :filter="filter"
             row-key="name"
-            style="height: 750px"
+            style="height: 450px"
           >
             <template v-slot:top-right>
               <q-input dense debounce="300" v-model="filter" placeholder="搜索节点">
@@ -29,22 +29,23 @@
                 <q-td key="operating" :props="props">
                 <q-btn-group push>
                   <q-btn class="btn-table text-white" push label="植入木马" icon="verified_user" @click="handleTableClick(props.row)"/>
-                  <q-btn class="btn-table text-white" push label="字典攻击" icon="tune"/>
-                  <q-btn class="btn-table text-white" push label="抓包分析" icon="tune"/>
-                  <q-btn class="btn-table text-white" push label="用户提权" icon="tune"/>
+                  <q-btn class="btn-table text-white" push label="字典攻击" icon="tune" @click="handleTableClick2(props.row)"/>
+                  <q-btn class="btn-table text-white" push label="抓包分析" icon="tune" @click="handleTableClick3(props.row)"/>
+                  <q-btn class="btn-table text-white" push label="用户提权" icon="tune" @click="handleTableClick4(props.row)"/>
                 </q-btn-group>
                 </q-td>
               </q-tr>
             </template>
           </q-table>
+          <q-img
+            class="cimo-shadow"
+            :grid="$q.screen.xs"
+            :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
+            style="height: 450px"
+          />
         </div>
         <div class="col-xs-12 col-md-3">
           <q-card class="my-card cimo-shadow">
-            <q-viewer>
-              <q-viewer
-                :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
-              />
-            </q-viewer>
             <q-card-section>
               <div class="text-overline text-orange-9">传输节点使能（获取控制权）</div>
             </q-card-section>
@@ -174,6 +175,30 @@ export default {
       })
     },
     handleTableClick (e) {
+      this.$router.push({
+        path: 'table-detail',
+        query: {
+          id: e.name
+        }
+      })
+    },
+    handleTableClick2 (e) {
+      this.$router.push({
+        path: 'table-detail',
+        query: {
+          id: e.name
+        }
+      })
+    },
+    handleTableClick3 (e) {
+      this.$router.push({
+        path: 'table-detail',
+        query: {
+          id: e.name
+        }
+      })
+    },
+    handleTableClick4 (e) {
       this.$router.push({
         path: 'table-detail',
         query: {

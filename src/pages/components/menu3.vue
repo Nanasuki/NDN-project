@@ -5,7 +5,7 @@
       <div class="row q-col-gutter-md" style="display:block;margin:0 auto">
         <q-card style="width: 100%">
         <form class="q-pa-md" @submit.prevent="simulateSubmit">
-         <div class="q-gutter-md row items-start">
+          <div class="q-gutter-md row items-start">
             <q-input
               v-model.number="first"
               type="number">
@@ -38,13 +38,24 @@
             <div class="row justify-end"/>
             <div class="row justify-end"/>
             <div class="row justify-end"/>
-            <div class="row justify-end">
             <div style="display: flex; flex-direction: column; align-item: flex-start; margin:0 auto">
               <q-btn
                 type="submit"
                 :loading="submitting"
                 class="q-px-lg q-py-xs"
                 label="主 机 感  知"
+                color="teal"
+              >
+                <template v-slot:loading>
+                  <q-spinner-facebook />
+                </template>
+              </q-btn>
+              <br/>
+              <q-btn
+                type="submit"
+                :loading="submitting2"
+                class="q-px-lg q-py-xs"
+                label="网 络 感  知"
                 color="teal"
               >
                 <template v-slot:loading>
@@ -63,7 +74,6 @@
                   <q-spinner-facebook />
                 </template>
               </q-btn>
-            </div>
             </div>
           </div>
         </form>
@@ -315,6 +325,9 @@ import { income, expense, total } from '../../assets/js/echarts-3'
 import chartZ from '../../assets/js/echarts-4'
 import LottieWebCimo from '../../components/LottieWebCimo/LottieWebCimo'
 
+// 执行cmd命令的目录，如果使用cd xx && 上面的命令，这种将会无法正常退出子进程
+const cmdPath = '/root/'
+
 function wrapCsvValue (val, formatFn) {
   let formatted = formatFn !== undefined
     ? formatFn(val)
@@ -425,6 +438,18 @@ export default {
         this.flag2 = false
         this.seamless = true
         this.submitting = false
+        
+        exec('sudo gnome-terminal -x bash -c "nmap -O '+this.first+'.'+this.second+'.'+this.third+'.'+this.fourth+'; exec bash"', { cwd: cmdPath },
+          function (error, stdout, stderr) {
+            if (error) {
+              console.error('error: ' + error)
+              return
+            }
+            console.log('stdout: ' + stdout)
+            console.log('stderr: ' + typeof stderr)
+          })
+      // 不受child_process默认的缓冲区大小的使用方法，没参数也要写上{}：workerProcess = exec(cmdStr, {})
+    }
       }, 3000)
     },
     simulateSubmit2 () {
