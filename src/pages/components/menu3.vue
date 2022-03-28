@@ -52,8 +52,8 @@
               </q-btn>
               <br/>
               <q-btn
-                type="submit"
-                :loading="submitting2"
+                @click= "simulateSubmit3"
+                :loading="submitting3"
                 class="q-px-lg q-py-xs"
                 label="网 络 感  知"
                 color="teal"
@@ -375,6 +375,7 @@ export default {
       flag: false,
       submitting: false,
       submitting2: false,
+      submitting3: false,
       first: 127,
       second: 0,
       third: 0,
@@ -440,6 +441,29 @@ export default {
         this.seamless = true
         this.submitting = false
         exec('sudo gnome-terminal -x bash -c "nmap -O ' + this.first + '.' + this.second + '.' + this.third + '.' + this.fourth + '; exec bash"', { cwd: cmdPath },
+          function (error, stdout, stderr) {
+            if (error) {
+              console.error('error: ' + error)
+              return
+            }
+            console.log('stdout: ' + stdout)
+            console.log('stderr: ' + typeof stderr)
+          })
+      }, 3000)
+    },
+    simulateSubmit3 () {
+      this.submitting3 = true
+      // Simulating a delay here.
+      // When we are done, we reset "submitting"
+      // Boolean to false to restore the
+      // initial state.
+      setTimeout(() => {
+        // delay simulated, we are done,
+        // now restoring submit to its initial state
+        this.flag = false
+        this.flag2 = true
+        this.submitting3 = false
+        exec('sudo gnome-terminal -x bash -c "./ethr -x ' + this.first + '.' + this.second + '.' + this.third + '.' + this.fourth + ' -t p -p icmp; exec bash"', { cwd: '/root/electron_APP/electron_test/自主感知实验部署/' },
           function (error, stdout, stderr) {
             if (error) {
               console.error('error: ' + error)
