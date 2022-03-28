@@ -5,8 +5,6 @@ import getters from './getters'
 import mutations from 'src/store/mutations'
 import actions from './actions'
 import modules from './modules'
-import Viewer from 'v-viewer'
-import 'viewerjs/dist/viewer.css'
 // import example from './module-example'
 
 Vue.use(Vuex)
@@ -27,7 +25,6 @@ const store = new Vuex.Store({
   mutations,
   actions,
   modules,
-  Viewer,
   // enable strict mode (adds overhead!)
   // for dev mode only
   strict: process.env.DEBUGGING
