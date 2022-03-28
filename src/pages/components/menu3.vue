@@ -94,7 +94,7 @@
             :columns="columns"
             :filter="filter"
             row-key="name"
-            style="height: 550px"
+            style="height: 600px; width: 100%"
             >
               <template v-slot:body="props">
                 <q-tr :props="props">
@@ -402,6 +402,10 @@ export default {
       data: [
         {
           name: 'node1',
+          image: this.$PUBLIC_PATH + 'data/自主感知.png'
+        },
+        {
+          name: 'node2',
           image: this.$PUBLIC_PATH + 'data/自主感知.png'
         }
       ]

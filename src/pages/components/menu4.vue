@@ -3,37 +3,7 @@
   <base-content>
     <div class="container q-pa-lg q-col-gutter-md">
       <div class="row q-col-gutter-md">
-      <div class="col-xs-12 col-md-6">
-          <q-card class="my-card cimo-shadow">
-            <q-img
-              :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
-            />
-            <q-card-section>
-              <div class="text-overline text-orange-9">传输节点使能（获取控制权）</div>
-            </q-card-section>
-            <q-card-actions>
-              <q-btn
-                color="grey"
-                label="扩散模型简介"
-                round
-                flat
-                dense
-                :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
-                @click="expanded = !expanded"
-              />
-            </q-card-actions>
-
-            <q-slide-transition>
-              <div v-show="expanded">
-                <q-separator/>
-                <q-card-section class="text-subitle2">
-                  {{ lorem }}
-                </q-card-section>
-              </div>
-            </q-slide-transition>
-          </q-card>
-        </div>
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-9">
           <q-table
             class="cimo-shadow"
             :grid="$q.screen.xs"
@@ -60,11 +30,44 @@
                 <q-btn-group push>
                   <q-btn class="btn-table text-white" push label="植入木马" icon="verified_user" @click="handleTableClick(props.row)"/>
                   <q-btn class="btn-table text-white" push label="字典攻击" icon="tune"/>
+                  <q-btn class="btn-table text-white" push label="抓包分析" icon="tune"/>
+                  <q-btn class="btn-table text-white" push label="用户提权" icon="tune"/>
                 </q-btn-group>
                 </q-td>
               </q-tr>
             </template>
           </q-table>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <q-card class="my-card cimo-shadow">
+            <q-viewer>
+              <q-viewer
+                :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
+              />
+            </q-viewer>
+            <q-card-section>
+              <div class="text-overline text-orange-9">传输节点使能（获取控制权）</div>
+            </q-card-section>
+            <q-card-actions>
+              <q-btn
+                color="grey"
+                label="扩散模型简介"
+                round
+                flat
+                dense
+                :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+                @click="expanded = !expanded"
+              />
+            </q-card-actions>
+            <q-slide-transition>
+              <div v-show="expanded">
+                <q-separator/>
+                <q-card-section class="text-subitle2">
+                  {{ lorem }}
+                </q-card-section>
+              </div>
+            </q-slide-transition>
+          </q-card>
         </div>
       </div>
     </div>

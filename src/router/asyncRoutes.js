@@ -305,7 +305,7 @@ const asyncRoutesChildren = [
           icon: 'filter_5',
           keepAlive: true
         },
-        component: () => import('pages/components/menu5.vue')
+        component: () => import('pages/components/menu6.vue')
       }
     ]
   },
