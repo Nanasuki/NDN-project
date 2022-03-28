@@ -5,6 +5,7 @@
     <div class="text-h4" align="center">请求文件冗余分片</div>
       <div class="row q-col-gutter-md">
         <div class="col-xs-12 col-md-12">
+          <q-card>
             <q-form @submit="onSubmit" class="q-gutter-md">
               <q-input
                 name="shards"
@@ -24,10 +25,10 @@
                 filled
                 text-white
               />
-
               <div>
                 <q-btn label="开 始 设 置" type="submit" color="primary" style="display:block;margin:0 auto" @click="persistent = true"/>
               </div>
+              <br/>
               <q-dialog v-model="persistent" persistent transition-show="scale" transition-hide="scale">
                 <q-card class="bg-teal text-white" style="width: 300px">
                   <q-card-section>
@@ -46,7 +47,7 @@
             </q-form>
 
             <q-card v-if="submitResult.length > 0" flat bordered class="q-mt-md bg-secondary">
-              <q-card-section class="text-white">确定提交，冗余编码模块设置如下：</q-card-section>
+              <q-card-section class="text-white">设置成功，冗余编码模块设置如下：</q-card-section>
               <q-separator />
               <q-card-section class="row q-gutter-sm items-center">
                 <div
@@ -56,18 +57,19 @@
                 >{{ item.name }} = {{ item.value }}</div>
               </q-card-section>
             </q-card>
+          </q-card>
         </div>
         <div class="col-xs-12 col-md-6">
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+          <q-card class="cimo-shadow" style="height: 100%">
+            <br/><br/>
             <q-img
               :src="this.$PUBLIC_PATH + 'data/冗余编码.png'"
             />
+            <div class="absolute-bottom text-h6 text-center" align="center">分 片 逻 辑 设 计</div>
+          </q-card>
         </div>
         <div class="col-xs-12 col-md-6">
+          <q-card style="max-height: 550px">
           <lottie-web-cimo
             ref="lottie_web"
             :path="defaultOptions.path"
@@ -75,6 +77,7 @@
             :animation-speed="defaultOptions.animationSpeed"
             @isLottieFinish="handleLottieFinish"
           />
+          </q-card>
         </div>
       </div>
     </div>

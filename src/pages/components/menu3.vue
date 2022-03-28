@@ -3,6 +3,7 @@
   <base-content>
     <div class="container q-pa-lg q-col-gutter-md">
       <div class="row q-col-gutter-md" style="display:block;margin:0 auto">
+        <q-card style="width: 100%">
         <form class="q-pa-md" @submit.prevent="simulateSubmit">
          <div class="q-gutter-md row items-start">
             <q-input
@@ -38,36 +39,92 @@
             <div class="row justify-end"/>
             <div class="row justify-end"/>
             <div class="row justify-end">
+            <div style="display: flex; flex-direction: column; align-item: flex-start; margin:0 auto">
               <q-btn
                 type="submit"
                 :loading="submitting"
                 class="q-px-lg q-py-xs"
-                label="感  知"
+                label="主 机 感  知"
                 color="teal"
               >
                 <template v-slot:loading>
                   <q-spinner-facebook />
                 </template>
               </q-btn>
+              <br/>
+              <q-btn
+                :loading="submitting2"
+                @click= "simulateSubmit2"
+                class="q-px-lg q-py-xs"
+                label="全 域 感  知"
+                color="primary"
+              >
+                <template v-slot:loading>
+                  <q-spinner-facebook />
+                </template>
+              </q-btn>
+            </div>
             </div>
           </div>
         </form>
+        </q-card>
       </div>
       <q-dialog v-model="seamless" seamless position="bottom">
-      <q-card style="width: 350px">
-        <q-linear-progress :value="1" color="pink" />
-
-        <q-card-section class="row items-center no-wrap">
-          <div>
-            <div class="text-weight-bold">该节点可以部署NDN网络</div>
-            <div class="text-grey">节点可利用能力：123</div>
-            <div class="text-grey">节点传输能力：4</div>
+        <q-card style="width: 450px">
+          <q-linear-progress :value="1" color="primary" />
+          <q-card-section class="row items-center no-wrap">
+            <div>
+              <div class="text-weight-bold">{{first}}.{{second}}.{{third}}.{{fourth}}：该节点可以部署NDN网络</div>
+              <div class="text-grey">节点可利用能力：{{available}}</div>
+              <div class="text-grey">节点传输能力：{{Transportable}}</div>
+            </div>
+            <q-space />
+            <q-btn flat round icon="close" v-close-popup />
+          </q-card-section>
+        </q-card>
+      </q-dialog>
+      <q-card v-if="flag2" flat class="q-mt-md bg-white-2">
+        <div class="row q-col-gutter-md">
+          <div class="col-xs-12 col-md-9">
+            <q-table
+            class="cimo-shadow"
+            :grid="$q.screen.xs"
+            title="全域感知监听"
+            :data="data"
+            :columns="columns"
+            :filter="filter"
+            row-key="name"
+            style="height: 550px"
+            >
+              <template v-slot:body="props">
+                <q-tr :props="props">
+                  <q-td key="name" :props="props">{{ props.row.name }}</q-td>
+                  <q-td key="calories" :props="props">
+                    <q-avatar square size="380px">
+                      <v-chart :options="charts2Option" autoresize/>
+                    </q-avatar>
+                  </q-td>
+                  <q-td key="fat" :props="props">
+                    <q-avatar square size="380px">
+                      <v-chart :options="charts2Option" autoresize/>
+                    </q-avatar>
+                  </q-td>
+                </q-tr>
+              </template>
+            </q-table>
           </div>
-          <q-space />
-          <q-btn flat round icon="close" v-close-popup />
-        </q-card-section>
+          <div class="col-xs-12 col-md-3">
+            <br/><br/><br/><br/><br/>
+            <lottie-web-cimo
+                ref="lottie_web"
+                :path="defaultOptions2.path"
+                :loop="defaultOptions2.loop"
+                :animation-speed="defaultOptions2.animationSpeed"
+                @isLottieFinish="handleLottieFinish"
+              />
+          </div>
+        </div>
       </q-card>
-    </q-dialog>
       <q-card v-if="flag" flat bordered class="q-mt-md bg-white-2">
           <div class="row q-col-gutter-md">
             <div class="col-xs-12 col-md-6">
@@ -223,19 +280,16 @@
         </q-card>
         <div class="row q-col-gutter-md">
           <div class="col-xs-12 col-md-6">
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
+            <q-card style="height: 100%">
+              <br/><br/><br/><br/><br/>
               <q-img
                 :src="this.$PUBLIC_PATH + 'data/自主感知.png'"
               />
+              <div class="absolute-bottom text-h6 text-center" align="center">传 输 节 点 自 主 感 知 框 架</div>
+            </q-card>
           </div>
           <div class="col-xs-12 col-md-6">
+            <q-card style="max-height: 550px">
               <lottie-web-cimo
                 ref="lottie_web"
                 :path="defaultOptions.path"
@@ -243,6 +297,7 @@
                 :animation-speed="defaultOptions.animationSpeed"
                 @isLottieFinish="handleLottieFinish"
               />
+            </q-card>
           </div>
         </div>
     </div>
@@ -288,9 +343,24 @@ export default {
   },
   data () {
     return {
+      defaultOptions: {
+        path: 'data/find_lottie.json',
+        loop: true,
+        animationSpeed: 1
+      },
+      defaultOptions2: {
+        path: 'data/over_lottie.json',
+        loop: true,
+        animationSpeed: 1
+      },
+      // 节点传输能力和可用能力
+      Transportable: 159,
+      available: 22,
+      //
       seamless: false,
       flag: false,
       submitting: false,
+      submitting2: false,
       first: 127,
       second: 0,
       third: 0,
@@ -309,7 +379,7 @@ export default {
         {
           name: 'name',
           required: true,
-          label: 'Dessert (100g serving)',
+          label: '网络节点',
           align: 'left',
           field: row => row.name,
           format: val => `${val}`,
@@ -318,35 +388,23 @@ export default {
         {
           name: 'calories',
           align: 'center',
-          label: 'Calories',
+          label: '时延',
           field: 'calories',
           sortable: true
         },
         {
           name: 'fat',
-          label: 'Fat (g)',
+          label: '抖动',
           field: 'fat',
-          sortable: true
-        },
-        {
-          name: 'carbs',
-          label: 'Carbs (g)',
-          field: 'carbs'
-        },
-        {
-          name: 'operating',
-          label: 'operating',
-          align: 'center',
-          field: 'operating',
           sortable: true
         }
       ],
-      data: [],
-      defaultOptions: {
-        path: 'data/find_lottie.json',
-        loop: true,
-        animationSpeed: 1
-      }
+      data: [
+        {
+          name: 'node1',
+          image: this.$PUBLIC_PATH + 'data/自主感知.png'
+        }
+      ]
     }
   },
   methods: {
@@ -360,8 +418,23 @@ export default {
         // delay simulated, we are done,
         // now restoring submit to its initial state
         this.flag = true
+        this.flag2 = false
         this.seamless = true
         this.submitting = false
+      }, 3000)
+    },
+    simulateSubmit2 () {
+      this.submitting2 = true
+      // Simulating a delay here.
+      // When we are done, we reset "submitting"
+      // Boolean to false to restore the
+      // initial state.
+      setTimeout(() => {
+        // delay simulated, we are done,
+        // now restoring submit to its initial state
+        this.flag = false
+        this.flag2 = true
+        this.submitting2 = false
       }, 3000)
     },
     handleTableClick (e) {
@@ -413,9 +486,8 @@ export default {
     background: linear-gradient(to right, #68E4BC 0%, #4AD0D1 99%);
     border-radius: 5px;
     font-size: 14px;
-    padding: 11px 15px;
     font-weight: bold;
-    width: 100%;
+    max-width: 450px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     color: #ffffff;
@@ -429,18 +501,7 @@ export default {
   }
 
   .expense {
-    width: 100%;
     background: linear-gradient(to left, #FCAC94 0%, #f3a183 98%);
-    border-radius: 5px;
-    font-size: 14px;
-    padding: 11px 15px;
-    font-weight: bold;
-    width: 100%;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    color: #ffffff;
-    box-shadow: 0 12px 12px -11px #FCA76C;
-    background-size: 200% auto;
   }
 
   .expense:hover {

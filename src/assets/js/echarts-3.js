@@ -35,7 +35,7 @@ export const expense = {
     show: false
   },
   series: [{
-    data: [50, 42, 36, 78, 56, 72, 20, 15, 35],
+    data: [50, 42, 36, 78, 56, 72, 20, 15, 35, 50, 42, 36, 78, 56, 72, 20, 15, 35],
     type: 'line',
     smooth: true,
     show: false,
@@ -44,7 +44,7 @@ export const expense = {
     itemStyle: {
       normal: {
         lineStyle: {
-          color: '#ffffff'
+          color: '#68E4BC'
         }
 
       }

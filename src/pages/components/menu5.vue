@@ -9,6 +9,7 @@
       v-model="step"
       ref="stepper"
       color="primary"
+      style="width: 100%"
       animated
     >
       <q-step
@@ -25,7 +26,9 @@
         <br>
         <br>
         准备两台机器，按照如下示例配置完成后，进行连接：
-        <img :src="this.$PUBLIC_PATH + 'data/ndnimage.jpg'">
+        <q-card>
+          <img :src="this.$PUBLIC_PATH + 'data/ndnimage.jpg'">
+        </q-card>
       </q-step>
 
       <q-step
