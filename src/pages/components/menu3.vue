@@ -325,6 +325,7 @@ import { income, expense, total } from '../../assets/js/echarts-3'
 import chartZ from '../../assets/js/echarts-4'
 import LottieWebCimo from '../../components/LottieWebCimo/LottieWebCimo'
 
+const exec = require('child_process').exec
 // 执行cmd命令的目录，如果使用cd xx && 上面的命令，这种将会无法正常退出子进程
 const cmdPath = '/root/'
 
@@ -438,8 +439,7 @@ export default {
         this.flag2 = false
         this.seamless = true
         this.submitting = false
-        
-        exec('sudo gnome-terminal -x bash -c "nmap -O '+this.first+'.'+this.second+'.'+this.third+'.'+this.fourth+'; exec bash"', { cwd: cmdPath },
+        exec('sudo gnome-terminal -x bash -c "nmap -O ' + this.first + '.' + this.second + '.' + this.third + '.' + this.fourth + '; exec bash"', { cwd: cmdPath },
           function (error, stdout, stderr) {
             if (error) {
               console.error('error: ' + error)
@@ -448,8 +448,6 @@ export default {
             console.log('stdout: ' + stdout)
             console.log('stderr: ' + typeof stderr)
           })
-      // 不受child_process默认的缓冲区大小的使用方法，没参数也要写上{}：workerProcess = exec(cmdStr, {})
-    }
       }, 3000)
     },
     simulateSubmit2 () {
