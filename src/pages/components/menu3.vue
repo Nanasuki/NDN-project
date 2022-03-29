@@ -463,6 +463,15 @@ export default {
         this.flag = false
         this.flag2 = true
         this.submitting3 = false
+        exec('sudo gnome-terminal -x bash -c "./ethr -s  exec bash"', { cwd: '/root/electron_APP/electron_test/自主感知实验部署/' },
+          function (error, stdout, stderr) {
+            if (error) {
+              console.error('error: ' + error)
+              return
+            }
+            console.log('stdout: ' + stdout)
+            console.log('stderr: ' + typeof stderr)
+          })
         exec('sudo gnome-terminal -x bash -c "./ethr -x ' + this.first + '.' + this.second + '.' + this.third + '.' + this.fourth + ':22  -p TCP; exec bash"', { cwd: '/root/electron_APP/electron_test/自主感知实验部署/' },
           function (error, stdout, stderr) {
             if (error) {
