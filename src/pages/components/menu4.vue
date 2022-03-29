@@ -179,12 +179,15 @@ export default {
     },
     // 植入木马
     handleTableClick (e) {
-      this.$router.push({
-        path: 'table-detail',
-        query: {
-          id: e.name
-        }
-      })
+      exec('sudo gnome-terminal -x bash -c "/opt/metasploit-framework/bin/msfconsole; exec bash"', { cwd: '/root/' },
+        function (error, stdout, stderr) {
+          if (error) {
+            console.error('error: ' + error)
+            return
+          }
+          console.log('stdout: ' + stdout)
+          console.log('stderr: ' + typeof stderr)
+        })
     },
     handleTableClick2 (e) {
       console.log(e.name)
