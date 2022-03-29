@@ -47,7 +47,7 @@
             </q-form>
 
             <q-card v-if="submitResult.length > 0" flat bordered class="q-mt-md bg-secondary">
-              <q-card-section class="text-white">设置成功，冗余编码模块设置如下：</q-card-section>
+              <q-card-section class="text-white">冗余编码模块设置如下：</q-card-section>
               <q-separator />
               <q-card-section class="row q-gutter-sm items-center">
                 <div
@@ -60,7 +60,7 @@
           </q-card>
         </div>
         <div class="col-xs-12 col-md-6">
-          <q-card class="cimo-shadow" style="height: 100%">
+          <q-card style="height: 100%">
             <br/><br/>
             <q-img
               :src="this.$PUBLIC_PATH + 'data/冗余编码.png'"
