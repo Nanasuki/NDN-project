@@ -37,12 +37,13 @@
               </q-tr>
             </template>
           </q-table>
-          <q-img
-            class="cimo-shadow"
-            :grid="$q.screen.xs"
-            :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
-            style="height: 450px"
-          />
+          <q-card>
+            <q-img
+              class="cimo-shadow"
+              :grid="$q.screen.xs"
+              :src="this.$PUBLIC_PATH + 'data/传输节点使能.png'"
+            />
+          </q-card>
         </div>
         <div class="col-xs-12 col-md-3">
           <q-card class="my-card cimo-shadow">
@@ -174,6 +175,7 @@ export default {
         console.log(error)
       })
     },
+    // 植入木马
     handleTableClick (e) {
       this.$router.push({
         path: 'table-detail',
