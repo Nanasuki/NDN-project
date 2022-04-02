@@ -197,7 +197,7 @@ export default {
       const submitResult2 = []
 
       for (const [name, value] of formData.entries()) {
-        const output = execSync('python sm3.py ' + value, { cwd: '/root/electron_APP/electron_test/public/data/' })
+        const output = execSync('python3 sm3.py ' + value, { cwd: '/root/electron_APP/electron_test/public/data/' })
         console.log('sync: ' + output[1].toString())
         // 异步执行
         const cmd = output[1].toString()
