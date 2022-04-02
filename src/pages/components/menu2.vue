@@ -98,7 +98,10 @@
                   v-for="(item, index) in submitResult2"
                   :key="index"
                   class="q-px-sm q-py-xs bg-info text-white rounded-borders text-center text-no-wrap"
-                >{{ item.name }} = {{ item.cmd }}</div>
+                >
+                  {{ item.name }} = {{ item.cmd }}
+                  <br/>
+                </div>
               </q-card-section>
             </q-card>
           </q-card>
@@ -212,10 +215,20 @@ export default {
         const output = execSync('python3 sm3.py ' + value, { cwd: '/root/electron_APP/electron_test/public/data/' })
         console.log('sync: ' + output.split('+'))
         // 异步执行
-        const cmd = output.split('+')
+        const cmd1 = output.split('+')[0]
+        const cmd2 = output.split('+')[1]
+        const cmd3 = output.split('+')[2]
         submitResult2.push({
           name,
-          cmd
+          cmd1
+        })
+        submitResult2.push({
+          name,
+          cmd2
+        })
+        submitResult2.push({
+          name,
+          cmd3
         })
       }
       this.submitResult2 = submitResult2
