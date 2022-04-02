@@ -95,12 +95,13 @@
               <q-separator />
               <q-card-section class="row q-gutter-sm items-center">
                 <div
-                  v-for="(item, index) in submitResult2"
-                  :key="index"
                   class="q-px-sm q-py-xs bg-info text-white rounded-borders text-center text-no-wrap"
                 >
-                  {{ item.name }} = {{ item.cmd }}
+                  {{ item.name }} = {{ item.cmd1 }}
                   <br/>
+                  {{ item.name }} = {{ item.cmd2 }}
+                  <br/>
+                  {{ item.name }} = {{ item.cmd3 }}
                 </div>
               </q-card-section>
             </q-card>
