@@ -234,9 +234,9 @@ if __name__ == '__main__':
     a = SM3()
     hash =a.sm3_hash(data, len(data))
     time2 = time()
-    print('输入：', str)
+    print('输入：', str,'+')
     print("摘要值:", end='')
-    print(byte2hex(hash))
+    print(byte2hex(hash), '+')
     print('用时：', time2 - time1)
     """
     print('-----------------------')

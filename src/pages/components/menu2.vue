@@ -136,6 +136,18 @@ import LottieWebCimo from '../../components/LottieWebCimo/LottieWebCimo'
 
 const execSync = require('child_process').execSync
 
+Buffer.prototype.split = Buffer.prototype.split || function (spl) {
+  const arr = []
+  let cur = 0
+  let n = 0
+  while ((n = this.indexOf(spl, cur)) !== -1) {
+    arr.push(this.slice(cur, n))
+    cur = n + spl.length
+  }
+  arr.push(this.slice(cur))
+  return arr
+}
+
 function wrapCsvValue (val, formatFn) {
   let formatted = formatFn !== undefined
     ? formatFn(val)
@@ -198,9 +210,9 @@ export default {
 
       for (const [name, value] of formData.entries()) {
         const output = execSync('python3 sm3.py ' + value, { cwd: '/root/electron_APP/electron_test/public/data/' })
-        console.log('sync: ' + output[1].toString())
+        console.log('sync: ' + output.split('+'))
         // 异步执行
-        const cmd = output[1].toString()
+        const cmd = output.split('+')
         submitResult2.push({
           name,
           cmd
