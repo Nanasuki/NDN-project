@@ -12,7 +12,7 @@
           </q-card-section>
           <q-separator dark inset />
           <q-card-section class="q-pt-none">
-            {{ lorem }}
+           <img src="../../../public/data/Latex/编码速率1.svg">
           </q-card-section>
         </q-card>
       </div>
@@ -27,7 +27,7 @@
           </q-card-section>
           <q-separator dark inset />
           <q-card-section class="q-pt-none">
-            {{ lorem }}
+            <div id="question-stem">{{ encoding_rate }}</div>
           </q-card-section>
         </q-card>
       </div>
@@ -126,12 +126,10 @@
 </template>
 <script>
 const exec = require('child_process').exec
-
 // 任何你期望执行的cmd命令，ls都可以
 const cmdStr = 'sudo gnome-terminal -x bash -c "./app.sh; exec bash"'
 // 执行cmd命令的目录，如果使用cd xx && 上面的命令，这种将会无法正常退出子进程
 const cmdPath = '/root/ndn-app/'
-
 export default {
   methods: {
     runExec () {
@@ -151,9 +149,12 @@ export default {
   },
   data () {
     return {
+      encoding_rate: '对于X个数据文件D={D_1,D_2,…,D_X}，其文件大小分别为L={L_1,L_2,…,L_X}，单位为Mb。对X个数据文件分别执行编码与解码操作，并记录其编码时间分别为T^enc={t_1^e,t_2^e,…,t_X^e}，解码时间为T^dec={t_1^d,t_2^d,…,t_X^d}，单位为秒。平均编码速率计算公式如下所示，指标要求为10Mbps。',
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       step: 1
     }
+  },
+  created () {
   }
 }
 </script>

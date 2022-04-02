@@ -59,6 +59,50 @@
             </q-card>
           </q-card>
         </div>
+        <div class="col-xs-12 col-md-12">
+          <q-card>
+            <q-form @submit="onSubmit2" class="q-gutter-md">
+              <q-input
+                name="filename"
+                v-model="text"
+                bg-color="#64b5f6"
+                label="文件名"
+                filled
+                text-white
+              />
+              <div>
+                <q-btn label="开 始 杂 凑" type="submit" color="primary" style="display:block;margin:0 auto" @click="persistent2 = true"/>
+              </div>
+              <br/>
+              <q-dialog v-model="persistent2" persistent2 transition-show="scale" transition-hide="scale">
+                <q-card class="bg-teal text-white" style="width: 300px">
+                  <q-card-section>
+                    <div class="text-h6">杂 凑 成 功</div>
+                  </q-card-section>
+
+                  <q-card-section class="q-pt-none text-white">
+                    文件名SM3算法杂凑完成！
+                  </q-card-section>
+                  <q-card-actions align="right" class="bg-white text-teal">
+                    <q-btn flat label="OK" v-close-popup />
+                  </q-card-actions>
+                </q-card>
+              </q-dialog>
+            </q-form>
+
+            <q-card v-if="submitResult2.length > 0" flat bordered class="q-mt-md bg-secondary">
+              <q-card-section class="text-white">杂凑后的文件名如下所示：</q-card-section>
+              <q-separator />
+              <q-card-section class="row q-gutter-sm items-center">
+                <div
+                  v-for="(item, index) in submitResult2"
+                  :key="index"
+                  class="q-px-sm q-py-xs bg-info text-white rounded-borders text-center text-no-wrap"
+                >{{ item.name }} = {{ item.cmd }}</div>
+              </q-card-section>
+            </q-card>
+          </q-card>
+        </div>
         <div class="col-xs-12 col-md-6">
           <q-card style="height: 100%">
             <br/><br/>
@@ -90,6 +134,8 @@ import { exportFile } from 'quasar'
 import BaseContent from '../../components/BaseContent/BaseContent'
 import LottieWebCimo from '../../components/LottieWebCimo/LottieWebCimo'
 
+const execSync = require('child_process').execSync
+
 function wrapCsvValue (val, formatFn) {
   let formatted = formatFn !== undefined
     ? formatFn(val)
@@ -120,8 +166,11 @@ export default {
     return {
       shards: '',
       gates: '',
+      filename: '',
       submitResult: [],
+      submitResult2: [],
       persistent: false,
+      persistent2: false,
       defaultOptions: {
         path: 'data/sparse_lottie.json',
         loop: true,
@@ -142,6 +191,22 @@ export default {
       }
 
       this.submitResult = submitResult
+    },
+    onSubmit2 (evt) {
+      const formData = new FormData(evt.target)
+      const submitResult2 = []
+
+      for (const [name, value] of formData.entries()) {
+        const output = execSync('python sm3.py ' + value, { cwd: '/root/electron_APP/electron_test/public/data/' })
+        console.log('sync: ' + output[1].toString())
+        // 异步执行
+        const cmd = output[1].toString()
+        submitResult2.push({
+          name,
+          cmd
+        })
+      }
+      this.submitResult2 = submitResult2
     },
     handleTableClick (e) {
       this.$router.push({

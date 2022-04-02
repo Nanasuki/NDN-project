@@ -1,4 +1,7 @@
 import Vue from 'vue'
+import MathJax from 'assets/js/MathJax'
+
+Vue.prototype.MathJax = MathJax
 
 Vue.config.productionTip = false
 
