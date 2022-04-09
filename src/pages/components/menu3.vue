@@ -110,13 +110,13 @@
                 <q-tr :props="props">
                   <q-td key="name" :props="props">{{ props.row.name }}</q-td>
                   <q-td key="calories" :props="props">
-                    <q-avatar square size="380px">
+                    <q-avatar v-if="optShow" square size="380px">
                       <v-chart :options="charts2Option" autoresize/>
                     </q-avatar>
                   </q-td>
                   <q-td key="fat" :props="props">
-                    <q-avatar square size="380px">
-                      <v-chart :options="charts2Option" autoresize/>
+                    <q-avatar v-if="optShow" square size="380px">
+                      <v-chart :options="charts2Option2" autoresize/>
                     </q-avatar>
                   </q-td>
                 </q-tr>
@@ -321,6 +321,7 @@ import BaseContent from '../../components/BaseContent/BaseContent'
 import { thumbStyle } from 'components/BaseContent/ThumbStyle'
 import chartPie from '../../assets/js/echarts-1'
 import charts2Option from '../../assets/js/echarts-2'
+import charts2Option2 from '../../assets/js/echarts-2-copy'
 import { income, expense, total } from '../../assets/js/echarts-3'
 import chartZ from '../../assets/js/echarts-4'
 import LottieWebCimo from '../../components/LottieWebCimo/LottieWebCimo'
@@ -376,6 +377,7 @@ export default {
       submitting: false,
       submitting2: false,
       submitting3: false,
+      optShow: true,
       first: 127,
       second: 0,
       third: 0,
@@ -384,6 +386,7 @@ export default {
       chartPie,
       chartZ,
       charts2Option,
+      charts2Option2,
       income,
       expense,
       total,
@@ -427,6 +430,11 @@ export default {
     }
   },
   methods: {
+    initSetTimeout () {
+      setInterval(() => {
+        this.charts2Option = this.charts2Option2
+      }, 100)
+    },
     simulateSubmit () {
       this.submitting = true
       // Simulating a delay here.
@@ -529,6 +537,9 @@ export default {
           icon: 'warning'
         })
       }
+    },
+    mounted () {
+      this.initSetTimeout()
     }
   }
 }

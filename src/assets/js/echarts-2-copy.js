@@ -5,7 +5,7 @@ const option = {
   backgroundColor: '#fff',
   // 标题
   title: {
-    text: '网络抖动',
+    text: '网络时延',
     textStyle: {
       fontSize: 12,
       fontWeight: 400
@@ -173,7 +173,7 @@ padding[2]的10:
     {
       name: 'To 发送端',
       type: 'line',
-      data: [10, 10, 30, 12, 15, 3, 7, 9, 8],
+      data: [4, 30, 10, 15, 15, 6, 6, 2, 12],
       symbolSize: 1,
       symbol: 'circle',
       smooth: true,
@@ -204,7 +204,7 @@ padding[2]的10:
     {
       name: 'To 接受端',
       type: 'line',
-      data: [5, 12, 11, 14, 25, 16, 10, 19, 25],
+      data: [12, 12, 5, 5, 30, 16, 11, 19, 20],
       symbolSize: 1,
       symbol: 'circle',
       smooth: true,
