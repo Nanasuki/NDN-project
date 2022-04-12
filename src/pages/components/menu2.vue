@@ -62,11 +62,11 @@
         <div class="col-xs-12 col-md-12">
           <q-card>
             <q-form @submit="onSubmit2" class="q-gutter-md">
-              <q-input
+              <q-file
                 name="filename"
-                v-model="text"
+                v-model="model"
                 bg-color="#64b5f6"
-                label="文件名"
+                label="请选择文件"
                 filled
                 text-white
               />
@@ -183,6 +183,7 @@ export default {
       shards: '',
       gates: '',
       filename: '',
+      model: null,
       submitResult: [],
       submitResult2: [],
       persistent: false,
