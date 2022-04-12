@@ -70,8 +70,9 @@
                 filled
                 text-white
               />
-              <div>
-                <q-btn label="开 始 杂 凑" type="submit" color="primary" style="display:block;margin:0 auto" @click="persistent2 = true"/>
+              <div class="q-pa-md q-gutter-sm">
+                <q-btn label="开 始 杂 凑" type="submit" color="primary" style="margin-left: 500px; margin-right: 25px" @click="persistent2 = true"/>
+                <q-btn label="冗 余 编 码" color="primary" @click="onSubmit4"/>
               </div>
               <br/>
               <q-dialog v-model="persistent2" persistent2 transition-show="scale" transition-hide="scale">
@@ -105,6 +106,38 @@
                 </div>
               </q-card-section>
             </q-card>
+          </q-card>
+        </div>
+        <div class="col-xs-12 col-md-12">
+          <q-card>
+            <q-form @submit="onSubmit3" class="q-gutter-md">
+              <q-input
+                name="filename"
+                v-model="text"
+                bg-color="#64b5f6"
+                label="请输入文件名"
+                filled
+                text-white
+              />
+              <div>
+                <q-btn label="开 始 恢 复 文 件" type="submit" color="primary" style="display:block;margin:0 auto" @click="persistent3 = true"/>
+              </div>
+              <br/>
+              <q-dialog v-model="persistent2" persistent2 transition-show="scale" transition-hide="scale">
+                <q-card class="bg-teal text-white" style="width: 300px">
+                  <q-card-section>
+                    <div class="text-h6">恢 复 成 功</div>
+                  </q-card-section>
+
+                  <q-card-section class="q-pt-none text-white">
+                    冗余编码文件恢复完成！
+                  </q-card-section>
+                  <q-card-actions align="right" class="bg-white text-teal">
+                    <q-btn flat label="OK" v-close-popup />
+                  </q-card-actions>
+                </q-card>
+              </q-dialog>
+            </q-form>
           </q-card>
         </div>
         <div class="col-xs-12 col-md-6">
@@ -184,6 +217,7 @@ export default {
       gates: '',
       filename: '',
       model: null,
+      text: null,
       submitResult: [],
       submitResult2: [],
       persistent: false,
@@ -234,6 +268,12 @@ export default {
         })
       }
       this.submitResult2 = submitResult2
+    },
+    onSubmit3 (evt) {
+      execSync('./decoder ' + this.text, { cwd: '/root/electron_APP/electron_test/冗余编码实验部署/' })
+    },
+    onSubmit4 (evt) {
+      execSync('./encoder ' + this.model, { cwd: '/root/electron_APP/electron_test/冗余编码实验部署/' })
     },
     handleTableClick (e) {
       this.$router.push({
