@@ -105,7 +105,8 @@
               <q-card-section class="text-white">杂凑后的文件名如下所示：</q-card-section>
               <q-separator />
               <q-card-section class="row q-gutter-sm items-center">
-                <div
+                <div v-for="(item, index) in submitResult2"
+                  :key="index"
                   class="q-px-sm q-py-xs bg-info text-white rounded-borders text-center text-no-wrap"
                 >
                   {{ item.name }} = {{ item.cmd1 }}
