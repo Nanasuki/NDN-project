@@ -71,8 +71,8 @@
                 text-white
               />
               <div class="q-pa-md q-gutter-sm">
-                <q-btn label="开 始 杂 凑" type="submit" color="primary" style="margin-left: 500px; margin-right: 25px" @click="persistent2 = true"/>
-                <q-btn label="冗 余 编 码" color="primary" @click="onSubmit4"/>
+                <q-btn label="开 始 杂 凑" type="submit" color="primary" style="margin-left: 40%; margin-right: 4%; margin-top:0; margin-bottom:0;" @click="persistent2 = true"/>
+                <q-btn label="冗 余 编 码" color="primary" style="margin-top:0; margin-bottom:0;" @click="onSubmit4"/>
               </div>
               <br/>
               <q-dialog v-model="persistent2" persistent2 transition-show="scale" transition-hide="scale">
