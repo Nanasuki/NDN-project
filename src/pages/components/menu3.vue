@@ -468,8 +468,8 @@ export default {
       setTimeout(() => {
         // delay simulated, we are done,
         // now restoring submit to its initial state
-        this.flag = false
-        this.flag2 = true
+        this.flag = true
+        this.flag2 = false
         this.submitting3 = false
         exec('sudo gnome-terminal -x bash -c "./ethr -s  exec bash"', { cwd: '/root/electron_APP/electron_test/自主感知实验部署/' },
           function (error, stdout, stderr) {
