@@ -260,6 +260,7 @@ export default {
       const submitResult2 = []
 
       for (const [name, value] of formData.entries()) {
+        console.log(name)
         this.filename = value.name
         const output = execSync('python3 sm3.py ' + value.name, { cwd: '/root/electron_APP/electron_test/public/data/' })
         console.log('sync: ' + output.split('+'))
