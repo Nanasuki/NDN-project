@@ -108,11 +108,11 @@
                 <div
                   class="q-px-sm q-py-xs bg-info text-white rounded-borders text-center text-no-wrap"
                 >
-                  {{ item.cmd1 }}
+                  {{ item.name }} = {{ item.cmd1 }}
                   <br/>
-                  {{ item.cmd2 }}
+                  {{ item.name }} = {{ item.cmd2 }}
                   <br/>
-                  {{ item.cmd3 }}
+                  {{ item.name }} = {{ item.cmd3 }}
                 </div>
               </q-card-section>
             </q-card>
@@ -260,7 +260,6 @@ export default {
       const submitResult2 = []
 
       for (const [name, value] of formData.entries()) {
-        console.log(name)
         this.filename = value.name
         const output = execSync('python3 sm3.py ' + value.name, { cwd: '/root/electron_APP/electron_test/public/data/' })
         console.log('sync: ' + output.split('+'))
@@ -269,12 +268,15 @@ export default {
         const cmd2 = output.split('+')[1]
         const cmd3 = output.split('+')[2]
         submitResult2.push({
+          name,
           cmd1
         })
         submitResult2.push({
+          name,
           cmd2
         })
         submitResult2.push({
+          name,
           cmd3
         })
       }
