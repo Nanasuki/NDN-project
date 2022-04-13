@@ -108,11 +108,11 @@
                 <div
                   class="q-px-sm q-py-xs bg-info text-white rounded-borders text-center text-no-wrap"
                 >
-                  {{ item.name }} = {{ item.cmd1 }}
+                  {{ item.cmd1 }}
                   <br/>
-                  {{ item.name }} = {{ item.cmd2 }}
+                  {{ item.cmd2 }}
                   <br/>
-                  {{ item.name }} = {{ item.cmd3 }}
+                  {{ item.cmd3 }}
                 </div>
               </q-card-section>
             </q-card>
@@ -268,15 +268,12 @@ export default {
         const cmd2 = output.split('+')[1]
         const cmd3 = output.split('+')[2]
         submitResult2.push({
-          name,
           cmd1
         })
         submitResult2.push({
-          name,
           cmd2
         })
         submitResult2.push({
-          name,
           cmd3
         })
       }
