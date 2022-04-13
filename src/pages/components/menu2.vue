@@ -99,6 +99,16 @@
                   </q-card-actions>
                 </q-card>
               </q-dialog>
+              <q-dialog v-model="persistent_file2" persistent_file2 transition-show="scale" transition-hide="scale">
+                <q-card class="bg-teal text-white" style="width: 300px">
+                  <q-card-section>
+                    <div class="text-h6">文件冗余编码成功！</div>
+                  </q-card-section>
+                  <q-card-actions align="right" class="bg-white text-teal">
+                    <q-btn flat label="OK" v-close-popup />
+                  </q-card-actions>
+                </q-card>
+              </q-dialog>
             </q-form>
 
             <q-card v-if="submitResult2.length > 0" flat bordered class="q-mt-md bg-secondary">
@@ -233,6 +243,7 @@ export default {
       persistent2: false,
       persistent3: false,
       persistent_file: false,
+      persistent_file2: false,
       defaultOptions: {
         path: 'data/sparse_lottie.json',
         loop: true,
@@ -289,6 +300,7 @@ export default {
       if (this.filename === '') {
         this.persistent_file = true
       } else {
+        this.persistent_file2 = true
         console.log(this.filename)
         execSync('./encoder ' + this.filename, { cwd: '/root/electron_APP/electron_test/冗余编码实验部署/' })
         this.filename = ''
