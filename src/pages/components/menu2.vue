@@ -64,7 +64,7 @@
             <q-form @submit="onSubmit2" class="q-gutter-md">
               <q-file
                 name="filename"
-                v-model="model"
+                v-model="filename"
                 bg-color="#64b5f6"
                 label="请选择文件"
                 filled
@@ -83,6 +83,16 @@
 
                   <q-card-section class="q-pt-none text-white">
                     文件名SM3算法杂凑完成！
+                  </q-card-section>
+                  <q-card-actions align="right" class="bg-white text-teal">
+                    <q-btn flat label="OK" v-close-popup />
+                  </q-card-actions>
+                </q-card>
+              </q-dialog>
+              <q-dialog v-model="persistent_file" persistent_file transition-show="scale" transition-hide="scale">
+                <q-card class="bg-teal text-white" style="width: 300px">
+                  <q-card-section>
+                    <div class="text-h6">请先执行杂凑</div>
                   </q-card-section>
                   <q-card-actions align="right" class="bg-white text-teal">
                     <q-btn flat label="OK" v-close-popup />
@@ -112,7 +122,7 @@
           <q-card>
             <q-form @submit="onSubmit3" class="q-gutter-md">
               <q-input
-                name="filename"
+                name="text"
                 v-model="text"
                 bg-color="#64b5f6"
                 label="请输入文件名"
@@ -123,7 +133,7 @@
                 <q-btn label="开 始 恢 复 文 件" type="submit" color="primary" style="display:block;margin:0 auto" @click="persistent3 = true"/>
               </div>
               <br/>
-              <q-dialog v-model="persistent2" persistent2 transition-show="scale" transition-hide="scale">
+              <q-dialog v-model="persistent3" persistent3 transition-show="scale" transition-hide="scale">
                 <q-card class="bg-teal text-white" style="width: 300px">
                   <q-card-section>
                     <div class="text-h6">恢 复 成 功</div>
@@ -222,6 +232,8 @@ export default {
       submitResult2: [],
       persistent: false,
       persistent2: false,
+      persistent3: false,
+      persistent_file: false,
       defaultOptions: {
         path: 'data/sparse_lottie.json',
         loop: true,
@@ -248,7 +260,8 @@ export default {
       const submitResult2 = []
 
       for (const [name, value] of formData.entries()) {
-        const output = execSync('python3 sm3.py ' + value, { cwd: '/root/electron_APP/electron_test/public/data/' })
+        this.filename = value.name
+        const output = execSync('python3 sm3.py ' + value.name, { cwd: '/root/electron_APP/electron_test/public/data/' })
         console.log('sync: ' + output.split('+'))
         // 异步执行
         const cmd1 = output.split('+')[0]
@@ -270,10 +283,17 @@ export default {
       this.submitResult2 = submitResult2
     },
     onSubmit3 (evt) {
+      console.log(this.text)
       execSync('./decoder ' + this.text, { cwd: '/root/electron_APP/electron_test/冗余编码实验部署/' })
     },
     onSubmit4 (evt) {
-      execSync('./encoder ' + this.model, { cwd: '/root/electron_APP/electron_test/冗余编码实验部署/' })
+      if (this.filename === '') {
+        this.persistent_file = true
+      } else {
+        console.log(this.filename)
+        execSync('./encoder ' + this.filename, { cwd: '/root/electron_APP/electron_test/冗余编码实验部署/' })
+        this.filename = ''
+      }
     },
     handleTableClick (e) {
       this.$router.push({
