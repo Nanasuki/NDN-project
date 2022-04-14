@@ -111,12 +111,12 @@
                   <q-td key="name" :props="props">{{ props.row.name }}</q-td>
                   <q-td key="calories" :props="props">
                     <q-avatar v-if="optShow" square size="380px">
-                      <v-chart :options="charts2Option" autoresize/>
+                      <v-chart :options="props.row.option1" autoresize/>
                     </q-avatar>
                   </q-td>
                   <q-td key="fat" :props="props">
                     <q-avatar v-if="optShow" square size="380px">
-                      <v-chart :options="charts2Option2" autoresize/>
+                      <v-chart :options="props.row.option2" autoresize/>
                     </q-avatar>
                   </q-td>
                 </q-tr>
@@ -322,6 +322,8 @@ import { thumbStyle } from 'components/BaseContent/ThumbStyle'
 import chartPie from '../../assets/js/echarts-1'
 import charts2Option from '../../assets/js/echarts-2'
 import charts2Option2 from '../../assets/js/echarts-2-copy'
+import charts2Option3 from '../../assets/js/echarts-2-copy2'
+import charts2Option4 from '../../assets/js/echarts-2-copy3'
 import { income, expense, total } from '../../assets/js/echarts-3'
 import chartZ from '../../assets/js/echarts-4'
 import LottieWebCimo from '../../components/LottieWebCimo/LottieWebCimo'
@@ -420,11 +422,13 @@ export default {
       data: [
         {
           name: 'node1',
-          image: this.$PUBLIC_PATH + 'data/自主感知.png'
+          option1: charts2Option,
+          option2: charts2Option2
         },
         {
           name: 'node2',
-          image: this.$PUBLIC_PATH + 'data/自主感知.png'
+          option1: charts2Option3,
+          option2: charts2Option4
         }
       ]
     }
